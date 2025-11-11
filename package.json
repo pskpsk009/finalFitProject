@@ -10,7 +10,8 @@
     "eject": "react-scripts eject",
     "postinstall": "npx prisma generate",
     "prisma:generate:local": "npx prisma generate --schema=prisma/schema.local.prisma",
-    "studio:local": "npx prisma studio --schema=prisma/schema.local.prisma"
+    "studio:local": "npx prisma studio --schema=prisma/schema.local.prisma",
+    "start:prod": "npx prisma generate && npx prisma migrate deploy && node src/server.js"
   },
   "dependencies": {
     "@prisma/client": "^6.19.0",

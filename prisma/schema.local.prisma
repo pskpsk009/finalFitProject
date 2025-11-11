@@ -1,0 +1,32 @@
+// Local development Prisma schema (SQLite). Use this with:
+//   npx prisma studio --schema=prisma/schema.local.prisma
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "windows", "linux", "linux-musl"]
+}
+
+datasource db {
+  provider = "sqlite"
+  // Keep using DATABASE_URL so you can switch easily via .env
+  url = env("DATABASE_URL")
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  username String   @unique
+  password String
+  weight   Float
+  height   Float
+  logs     Log[]
+}
+
+model Log {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  type      String
+  value     String
+  timestamp DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}

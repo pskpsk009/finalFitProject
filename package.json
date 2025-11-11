@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node src/server.js",
+    "start:client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "npx prisma generate"
   },
   "dependencies": {
+    "@prisma/client": "^6.19.0",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
     "buffer": "^6.0.3",
@@ -32,7 +35,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@prisma/client": "^6.19.0",
     "prisma": "^6.19.0"
   }
 }

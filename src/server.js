@@ -3,13 +3,17 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const { PrismaClient } = require('@prisma/client');
 const jwt = require('jsonwebtoken');
+const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const prisma = new PrismaClient();
-const SECRET_KEY = 'your_secret_key'; // Replace with a secure key
+const SECRET_KEY = process.env.SECRET_KEY || 'your_secret_key'; // Replace with a secure key in production
+
+const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || 'http://localhost:3000';
 
 const corsOptions = {
-  origin: 'http://localhost:3000', // Allow requests from the frontend
+  origin: FRONTEND_ORIGIN,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
@@ -19,7 +23,7 @@ app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   res.setHeader('Content-Security-Policy', "default-src *; connect-src *;");
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // Explicitly allow requests from the frontend
+  res.setHeader('Access-Control-Allow-Origin', FRONTEND_ORIGIN);
   next();
 });
 
@@ -236,18 +240,28 @@ app.get('/validate-token', authenticateToken, (req, res) => {
   }
 });
 
-// Catch-all route for unknown endpoints
+// (API routes are defined above)
+
+// Serve React build (if present) for production deployments
+const buildPath = path.resolve(__dirname, '..', 'build');
+if (fs.existsSync(buildPath)) {
+  app.use(express.static(buildPath));
+  // serve index.html for non-API requests
+  app.get('*', (req, res, next) => {
+    // allow API routes to continue
+    if (req.path.startsWith('/user') || req.path.startsWith('/logs') || req.path.startsWith('/login') || req.path.startsWith('/validate-token')) {
+      return next();
+    }
+    res.sendFile(path.join(buildPath, 'index.html'));
+  });
+}
+
+// Final catch-all for anything not handled (API 404s and other missing resources)
 app.use((req, res) => {
   res.status(404).json({ message: 'Endpoint not found' });
 });
 
-// Update Content Security Policy to allow all connections during development
-app.use((req, res, next) => {
-  res.setHeader('Content-Security-Policy', "default-src *; connect-src *;");
-  next();
-});
-
-const PORT = 5004;
+const PORT = process.env.PORT || 5004;
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://0.0.0.0:${PORT}`);
 });

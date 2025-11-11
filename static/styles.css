@@ -1,0 +1,94 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Card */
+.card {
+  background-color: #1e3a8a; /* Primary blue */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.card h1 {
+  margin: 0 0 10px;
+  font-size: 24px;
+}
+
+.card p {
+  margin: 0 0 20px;
+  font-size: 16px;
+  color: #d1d5db; /* Secondary gray */
+}
+
+/* Form Group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-group input {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group button {
+  padding: 10px;
+  background-color: #3b82f6; /* Accent blue */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+/* Button Hover and Click Effects */
+.form-group button:hover {
+  transform: scale(1.1);
+  background-color: #60a5fa; /* Lighter blue */
+}
+
+.form-group button:active {
+  background-color: #1e40af; /* Darker blue */
+}
+
+/* Log History */
+.log-history {
+  margin-top: 20px;
+  background-color: #1e3a8a; /* Primary blue */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.log-history h2 {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+
+.log-history div {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 10px;
+  background-color: #3b82f6; /* Accent blue */
+  border-radius: 5px;
+}

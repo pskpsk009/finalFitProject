@@ -1,0 +1,71 @@
+.logger-container {
+  display: block;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.logger-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #1e40af; /* Primary blue */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logger-add-log {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+  margin-bottom: 16px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.logger-input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.logger-input:focus {
+  outline: none;
+  border-color: #3b82f6; /* Accent blue */
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.5); /* Subtle blue glow */
+}
+
+.logger-button {
+  background-color: #3b82f6; /* Accent blue */
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.logger-button:hover {
+  transform: scale(1.05);
+  background-color: #60a5fa; /* Lighter blue */
+}
+
+.logger-button:active {
+  background-color: #1e40af; /* Darker blue */
+}
+
+.logger-log-item {
+  background-color: #e5e7eb; /* Light gray for log items */
+  color: #1f2937; /* Dark gray text */
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}

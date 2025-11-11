@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Responsive UI</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #4B5563; /* Gray background */
+      color: #D1D5DB; /* Secondary gray text */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background-color: #1E3A8A; /* Primary blue */
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    .card h1 {
+      font-size: 1.8rem;
+      color: #FFFFFF; /* White text */
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 1rem;
+      color: #D1D5DB; /* Secondary gray text */
+      margin-bottom: 20px;
+    }
+
+    .card button {
+      background-color: #3B82F6; /* Accent blue */
+      color: #FFFFFF; /* White text */
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card button:hover {
+      transform: scale(1.1); /* Scale on hover */
+      background-color: #60A5FA; /* Lighter blue */
+    }
+
+    .card button:active {
+      background-color: #1E40AF; /* Darker blue */
+    }
+
+    /* Ripple Effect */
+    .card button::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+      opacity: 0;
+    }
+
+    .card button:active::after {
+      width: 200%;
+      height: 200%;
+      opacity: 0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .card h1 {
+        font-size: 1.5rem;
+      }
+
+      .card p {
+        font-size: 0.9rem;
+      }
+
+      .card button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Welcome to the Modern UI</h1>
+    <p>This is a clean, minimalistic, and responsive design. Click the button below to explore more!</p>
+    <button onclick="handleClick()">Click Me</button>
+  </div>
+
+  <script>
+    function handleClick() {
+      alert('Button clicked! Enjoy the modern UI.');
+    }
+  </script>
+</body>
+</html>

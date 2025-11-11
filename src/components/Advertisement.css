@@ -1,0 +1,57 @@
+.advertisement-container {
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Ensure login container is clickable above other UI elements */
+.advertisement-container .login-wrapper {
+  position: relative;
+  z-index: 10000;
+  pointer-events: auto;
+}
+
+.advertisement-title {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.advertisement-description {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.advertisement-section {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.advertisement-item {
+  text-align: center;
+}
+
+.advertisement-image {
+  --ad-img-w: 300px; /* default width */
+  --ad-img-h: 200px; /* default height */
+  width: var(--ad-img-w);
+  height: var(--ad-img-h);
+  max-width: 90%;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+/* utility classes to quickly resize from JSX */
+.ad-size-small {
+  --ad-img-w: 200px;
+  --ad-img-h: 140px;
+}
+.ad-size-medium {
+  --ad-img-w: 300px;
+  --ad-img-h: 200px;
+}
+.ad-size-large {
+  --ad-img-w: 420px;
+  --ad-img-h: 280px;
+}

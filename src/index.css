@@ -1,0 +1,99 @@
+/* Theme variables */
+:root {
+  --bg: #f3f4f6;
+  --text: #111827;
+  --muted-text: #6b7280;
+  --border: #e5e7eb;
+  --card-bg: #ffffff;
+  --panel-bg: #fafafa;
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --accent-active: #1e40af;
+  --danger: #ef4444;
+  --heading: #1e40af;
+}
+
+[data-theme="dark"] {
+  --bg: #0f172a; /* slate-900 */
+  --text: #e5e7eb; /* zinc-200 */
+  --muted-text: #9ca3af; /* gray-400 */
+  --border: #334155; /* slate-700 */
+  --card-bg: #111827; /* gray-900 */
+  --panel-bg: #0b1220; /* deep panel */
+  --accent: #60a5fa; /* blue-400 */
+  --accent-hover: #93c5fd; /* blue-300 */
+  --accent-active: #2563eb; /* blue-600 */
+  --danger: #f87171; /* red-400 */
+  --heading: #93c5fd; /* blue-300 */
+}
+
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  padding: 8px;
+}
+
+button {
+  background-color: var(--accent);
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background-color: var(--accent-hover);
+}
+
+button:active {
+  background-color: var(--accent-active);
+}
+
+h1,
+h2 {
+  margin-top: 20px;
+  color: var(--text);
+}
+
+input,
+select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background-color: var(--card-bg);
+  color: var(--text);
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 5px var(--accent);
+}
+
+div {
+  margin-bottom: 20px;
+}
+
+.log-item,
+.log-container {
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 10px;
+  background-color: var(--card-bg);
+  color: var(--text);
+}

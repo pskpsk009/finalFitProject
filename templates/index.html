@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness & Nutrition Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .log-item {
+            border: 1px solid #CCC;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .compare-section {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #28A745;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Fitness & Nutrition Tracker</h1>
+    <h2>Logged Items</h2>
+    <div id="log-items">
+        <p>No logged items yet.</p>
+    </div>
+
+    <div class="compare-section">
+        <h3>Compare BMI</h3>
+        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+            <select id="first-log">
+                <option value="">Select First Log</option>
+            </select>
+            <select id="second-log">
+                <option value="">Select Second Log</option>
+            </select>
+        </div>
+        <button onclick="compareLogs()">Compare</button>
+    </div>
+
+    <div id="comparison-result" style="margin-top: 20px;"></div>
+
+    <script>
+        // Fetch logs from the backend and populate the UI
+        function fetchLogs() {
+            fetch('/logs')
+                .then(response => response.json())
+                .then(data => {
+                    const logItems = document.getElementById('log-items');
+                    const firstLogSelect = document.getElementById('first-log');
+                    const secondLogSelect = document.getElementById('second-log');
+
+                    logItems.innerHTML = '';
+                    firstLogSelect.innerHTML = '<option value="">Select First Log</option>';
+                    secondLogSelect.innerHTML = '<option value="">Select Second Log</option>';
+
+                    if (data.log_history.length > 0) {
+                        data.log_history.forEach((log, index) => {
+                            // Add log items to the UI
+                            const logDiv = document.createElement('div');
+                            logDiv.className = 'log-item';
+                            logDiv.innerHTML = `
+                                <h3>Logged Data ${index + 1}</h3>
+                                <p><strong>Type:</strong> ${log.type}</p>
+                                <p><strong>Value:</strong> ${log.value}</p>
+                                <p><strong>Timestamp:</strong> ${log.timestamp}</p>
+                            `;
+                            logItems.appendChild(logDiv);
+
+                            // Add options to the select dropdowns
+                            const option = document.createElement('option');
+                            option.value = index;
+                            option.textContent = `Logged Data ${index + 1}`;
+                            firstLogSelect.appendChild(option);
+                            secondLogSelect.appendChild(option.cloneNode(true));
+                        });
+                    } else {
+                        logItems.innerHTML = '<p>No logged items yet.</p>';
+                    }
+                });
+        }
+
+        // Compare two selected logs
+        function compareLogs() {
+            const firstLogIndex = document.getElementById('first-log').value;
+            const secondLogIndex = document.getElementById('second-log').value;
+
+            if (!firstLogIndex || !secondLogIndex || firstLogIndex === secondLogIndex) {
+                document.getElementById('comparison-result').innerHTML = '<p>Please select two different logged entries.</p>';
+                return;
+            }
+
+            fetch('/logs')
+                .then(response => response.json())
+                .then(data => {
+                    const log1 = data.log_history[firstLogIndex];
+                    const log2 = data.log_history[secondLogIndex];
+
+                    const bmiDifference = parseFloat(log1.value.split(': ')[1]) - parseFloat(log2.value.split(': ')[1]);
+                    const recommendation =
+                        bmiDifference > 0
+                            ? 'Consider reducing calorie intake and increasing physical activity.'
+                            : bmiDifference < 0
+                            ? 'Great progress! Maintain a balanced diet and regular exercise.'
+                            : 'Your BMI is consistent. Keep up the good work!';
+
+                    document.getElementById('comparison-result').innerHTML = `
+                        <h3>Comparison Result</h3>
+                        <p><strong>Log 1 Value:</strong> ${log1.value}</p>
+                        <p><strong>Log 2 Value:</strong> ${log2.value}</p>
+                        <p><strong>BMI Difference:</strong> ${bmiDifference.toFixed(2)}</p>
+                        <p><strong>Recommendation:</strong> ${recommendation}</p>
+                    `;
+                });
+        }
+
+        // Fetch logs on page load
+        fetchLogs();
+    </script>
+</body>
+</html>

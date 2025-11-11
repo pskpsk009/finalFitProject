@@ -1,0 +1,83 @@
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.popup-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  /* center children vertically with the image and button stacked */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: popup-slide-in 0.5s ease;
+}
+
+.popup-image {
+  --popup-img-w: 300px;
+  --popup-img-h: 200px;
+  width: var(--popup-img-w);
+  height: var(--popup-img-h);
+  max-width: 90%;
+  border-radius: 10px;
+  object-fit: cover;
+  margin: 8px 0 0 0; /* small top gap, keep bottom 0 so button sits close below */
+}
+
+/* utility classes for popup image sizes */
+.popup-img-small {
+  --popup-img-w: 240px;
+  --popup-img-h: 160px;
+}
+.popup-img-medium {
+  --popup-img-w: 300px;
+  --popup-img-h: 200px;
+}
+.popup-img-large {
+  --popup-img-w: 420px;
+  --popup-img-h: 280px;
+}
+
+.popup-close-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 8px; /* ensures button is directly below the image */
+}
+
+.popup-close-button:hover {
+  background-color: #0056b3;
+}
+
+@keyframes popup-slide-in {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

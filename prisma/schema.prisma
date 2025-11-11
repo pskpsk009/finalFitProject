@@ -11,7 +11,9 @@ generator client {
 
 
 datasource db {
-  provider = "sqlite"
+  // Switched to PostgreSQL for production deployments. Set the DATABASE_URL
+  // environment variable (e.g. postgresql://USER:PASSWORD@HOST:PORT/DATABASE).
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
